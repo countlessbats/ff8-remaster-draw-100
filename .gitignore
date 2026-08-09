@@ -1,3 +1,4 @@
 # Never commit game binaries (copyrighted; regenerated locally by apply.ps1)
 *.bak
 *.dll
+*.draw100-backup
