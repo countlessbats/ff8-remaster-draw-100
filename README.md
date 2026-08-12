@@ -1,8 +1,8 @@
-# FF8 Remastered - Draw 100 Mod v0.1.2
+# FF8 Remastered - Draw 100 Mod v0.1.3
 
-Any successful Draw (in battle or at a draw point) fills that spell's stock to
-the maximum of 100 immediately. Draw resistance and the chance to fail are
-unchanged - only the amount you receive.
+Any successful Draw fills that spell's stock to the maximum of 100 immediately -
+both the in-battle Draw command and field Draw Points. Draw resistance and the
+chance to fail are unchanged - only the amount you receive.
 
 ## Install (easy way)
 
@@ -34,12 +34,19 @@ powershell -NoProfile -ExecutionPolicy Bypass -File ".\apply.ps1" -GameDir "D:\G
 ## How it works
 
 The game adds drawn magic to your stock one unit at a time through a routine
-that caps stock at 100. This mod changes 2 bytes of that routine
-(`mov bl,[esi]` -> `mov bl,100`) so the quantity written back to your inventory
-is always the full 100 - the permanent, file-patch equivalent of the community
-Cheat Engine script "Full Stock (100) on Draw". The patch site is located by
-signature scan, so it fails safely (no write) rather than patching the wrong
-bytes if a game update moves the code.
+that caps stock at 100. There are two copies of that routine - one for the
+in-battle Draw command and one for field Draw Points - so this mod patches
+both. Each site changes 2 bytes (`mov bl,[esi]` -> `mov bl,100`) so the quantity
+written back to your inventory is always the full 100 - the permanent, file-patch
+equivalent of the community Cheat Engine script "Full Stock (100) on Draw". Each
+site is located by its own signature scan, so the installer fails safely (no
+write) rather than patching the wrong bytes if a game update moves the code.
+
+## Changelog
+
+- v0.1.3 - also patch field Draw Points (v0.1.2 only affected the in-battle Draw command).
+- v0.1.2 - ASCII-only scripts, auto-locate the game folder, double-click .bat launchers.
+- v0.1.1 - initial release (in-battle Draw only).
 
 ## Notes
 
