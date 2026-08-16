@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=Install FF8 Draw 100
+Comment=Make Draw fill magic to 100 (in-battle Draw and field Draw Points)
+Icon=applications-games
+Terminal=false
+Exec=bash -c "p=\"\${1#file://}\"; exec bash \"\$(dirname \"\$p\")/gui.sh\" apply" _ %k
+Categories=Game;Utility;

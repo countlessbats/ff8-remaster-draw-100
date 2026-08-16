@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=Uninstall FF8 Draw 100
+Comment=Revert the Draw 100 patch
+Icon=applications-games
+Terminal=false
+Exec=bash -c "p=\"\${1#file://}\"; exec bash \"\$(dirname \"\$p\")/gui.sh\" restore" _ %k
+Categories=Game;Utility;

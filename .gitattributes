@@ -1,5 +1,7 @@
-# Keep shell scripts and the Python patcher LF on every platform (CRLF breaks bash).
-*.sh    text eol=lf
-*.py    text eol=lf
+# Keep shell scripts, the Python patcher, and Linux launchers LF on every
+# platform (CRLF breaks bash and .desktop launchers).
+*.sh      text eol=lf
+*.py      text eol=lf
+*.desktop text eol=lf
 # Windows launchers stay CRLF.
 *.bat   text eol=crlf

@@ -20,7 +20,7 @@ import sys
 import shutil
 import glob
 
-__version__ = "0.1.4"
+__version__ = "0.1.5"
 
 DLL_NAME = "FFVIII_EFIGS.dll"
 BACKUP_NAME = "FFVIII_EFIGS.dll.draw100-backup"
@@ -74,12 +74,11 @@ def candidate_game_dirs():
     return cands
 
 
-def find_game_dir(override):
+def find_game_dir_optional(override):
+    """Return the game folder if found, else None (never raises)."""
     if override:
         dll = os.path.join(override, DLL_NAME)
-        if os.path.isfile(dll):
-            return os.path.abspath(override)
-        raise SystemExit(f"ERROR: {DLL_NAME} not found in --game-dir: {override}")
+        return os.path.abspath(override) if os.path.isfile(dll) else None
     # 1) Walk up from the script's folder (works if placed inside the game folder).
     d = script_dir()
     for _ in range(8):
@@ -93,6 +92,15 @@ def find_game_dir(override):
     for c in candidate_game_dirs():
         if os.path.isfile(os.path.join(c, DLL_NAME)):
             return os.path.abspath(c)
+    return None
+
+
+def find_game_dir(override):
+    g = find_game_dir_optional(override)
+    if g is not None:
+        return g
+    if override:
+        raise SystemExit(f"ERROR: {DLL_NAME} not found in --game-dir: {override}")
     raise SystemExit(
         "ERROR: Could not find FFVIII_EFIGS.dll.\n"
         "Put this folder inside your 'FINAL FANTASY VIII Remastered' game folder and\n"
@@ -217,9 +225,16 @@ def main():
     if "--game-dir" in args:
         i = args.index("--game-dir")
         override = args[i + 1] if i + 1 < len(args) else None
-    if cmd not in ("apply", "restore", "status"):
+    if cmd not in ("apply", "restore", "status", "locate"):
         print(__doc__)
         raise SystemExit(2)
+    if cmd == "locate":
+        # Print the game folder if found (for GUI wrappers); exit 3 if not found.
+        g = find_game_dir_optional(override)
+        if g:
+            print(g)
+            return
+        raise SystemExit(3)
     game_dir = find_game_dir(override)
     {"apply": cmd_apply, "restore": cmd_restore, "status": cmd_status}[cmd](game_dir)
 
