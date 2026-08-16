@@ -1,10 +1,14 @@
-# FF8 Remastered - Draw 100 Mod v0.1.3
+# FF8 Remastered - Draw 100 Mod v0.1.4
 
 Any successful Draw fills that spell's stock to the maximum of 100 immediately -
 both the in-battle Draw command and field Draw Points. Draw resistance and the
 chance to fail are unchanged - only the amount you receive.
 
-## Install (easy way)
+**Steam Deck / Linux:** use the `steamdeck/` folder instead of the steps below;
+see `steamdeck/README.md`. The patch is identical (the Deck runs the same game
+files through Proton) - only the installer differs.
+
+## Install (Windows, easy way)
 
 1. Copy the whole `Draw100Mod` folder into your game folder - the one that
    contains `FFVIII_EFIGS.dll`. On Steam that is usually:
@@ -44,6 +48,7 @@ write) rather than patching the wrong bytes if a game update moves the code.
 
 ## Changelog
 
+- v0.1.4 - add Steam Deck / Linux installer (see `steamdeck/`). Windows patch unchanged.
 - v0.1.3 - also patch field Draw Points (v0.1.2 only affected the in-battle Draw command).
 - v0.1.2 - ASCII-only scripts, auto-locate the game folder, double-click .bat launchers.
 - v0.1.1 - initial release (in-battle Draw only).
